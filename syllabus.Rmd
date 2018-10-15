@@ -1,10 +1,11 @@
 ---
-title: "About this site"
+title: "Syllabus"
 description: |
-  Some additional details about the website
+  Syllabus del curso Tópicos en Economía y Negocios utilizando R
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+<iframe src="images/ENMEC35701.pdf" frameborder="0" width="650" height="950" marginheight="0" marginwidth="0" id="pdf"></iframe>
