@@ -22,7 +22,7 @@ navbar:
     - text: "Examenes"
       href: examenes.html
     - icon: fa-question fa-lg
-      href: www.example.com
+      href: https://gcabrerag.rbind.io/
     - icon: fab fa-github
       href: https://github.com/GaboCg
       
