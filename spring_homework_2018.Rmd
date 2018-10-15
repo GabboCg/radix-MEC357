@@ -1,0 +1,28 @@
+---
+title: "Tareas Primavera 2018"
+description: |
+  Some additional details about the website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Radix at:
+# https://rstudio.github.io/radix/website.html
+
+```
+
+# Tarea 1 
+
+---
+
+# Tarea 2 
+
+---
+
+# Tarea 3
+
+---
+
+# Tarea 4
+

@@ -1,0 +1,31 @@
+name: "radix_website"
+title: "R para economía y negocios"
+description: |
+  R para economía y negocios
+output_dir: "_site"
+navbar:
+  logo:
+    image: images/logo-uchile.gif
+    href: https://gcabrerag.rbind.io/
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Syllabus"
+      href: syllabus.html
+    - text: "Tareas"
+      menu:
+        - text: "Otoño 2018"
+        - text: "Primavera 2018"
+          href: spring_homework_2018.html
+    - text: "Controles"
+      href: controles.html
+    - text: "Examenes"
+      href: examenes.html
+    - icon: fa-question fa-lg
+      href: www.example.com
+    - icon: fab fa-github
+      href: https://github.com/GaboCg
+      
+output: 
+  radix::radix_article:
+    css: styles.css
