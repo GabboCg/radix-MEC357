@@ -1,0 +1,7 @@
+body {
+    text-align: justify;
+}
+
+div.quote-container blockquote p {
+  font-size: 15px;
+}
