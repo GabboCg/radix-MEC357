@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo = FALSE)
 # Tarea 1
 
 <p>
-<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 10px;
-border: solid black 1px; padding: 2px">
+<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 20px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
 </p>
 
@@ -25,8 +25,8 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 # Tarea 2 
 
 <p>
-<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 10px;
-border: solid black 1px; padding: 2px">
+<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 20px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
 </p>
 
@@ -35,8 +35,8 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 # Tarea 3
 
 <p>
-<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 10px;
-border: solid black 1px; padding: 2px">
+<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 20px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
 </p>
 
@@ -45,8 +45,8 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 # Tarea 4
 
 <p>
-<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 10px;
-border: solid black 1px; padding: 2px">
+<img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 20px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
 </p>
 
