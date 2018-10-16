@@ -137,8 +137,3 @@ A partir de las variables seleccionadas del *World Development Indicators* de su
 
 Visite el sitio web [http://datos.gob.cl/](http://datos.gob.cl/) y descargue una base de datos de su preferencia^[Debe contener las comunas de la región Metropolitana.], justificando su elección. Luego, represente los datos seleccionados en un mapa de una o varias de las comunas de la región Metropolitana. Los mapas vectoriales pueden ser descargados de [https://www.bcn.cl](https://www.bcn.cl/siit/mapas_vectoriales).
 
-<br>
-
-> *Disclaimer*: La información contenida en esta página está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Licencia Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional</a> <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"></a> y fue construida bajo mi rol como ayudante (*Teacher Assistant*) de la Catedra Topicos en economía y negocios utilizando R (*R for economy and business*). 
-<br>
-<img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png"/> 
