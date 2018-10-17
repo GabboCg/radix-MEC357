@@ -20,7 +20,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning=FALSE, message=FALSE)
 ```
 
 ---
@@ -66,11 +66,18 @@ decade_movies <- movie_dataset %>%
                  mutate(year = year(release_date), decade = year - year%%10, n = n()) %>% 
                  group_by(decade, n) %>% 
                  summarise(n()) %>% 
-                 mutate(percentage = `n()`/n)
+                 mutate(percentage = `n()`/n) %>% 
+                 mutate(label = paste0("Década ",decade))
 ```
 
 ```{r}
-p <- plot_ly(decade_movies, labels = ~ decade, values = ~percentage, type = "pie") %>%
+p <- plot_ly(decade_movies, labels = ~ label, values = ~percentage, type = "pie",
+              textposition = "inside",
+              textinfo = "percent",
+              hoverinfo = 'text',
+              text = ~ paste('%', round(percentage*100, 2)),
+              marker = list(colors = colors,
+                      line = list(color = '#FFFFFF', width = 1))) %>%
          layout(title = "Porcentaje de películas por década",
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
@@ -115,11 +122,21 @@ mapa_estados <- map_data("state")
 ```
 
 ```{r}
+state_name<- aggregate(cbind(long,lat) ~ region, data = mapa_estados, mean)
+```
+
+```{r}
+breaks <- cut(peliculas_estado$presupuesto/1000, 0:9, labels=c("0", sprintf("%2f", 1:8)))
+```
+
+```{r, fig.width=12, fig.height=8}
 g1 <- ggplot(peliculas_estado) + 
-      geom_map(aes(map_id = nombre_estado, fill = presupuesto), map = mapa_estados) + 
+      geom_map(aes(map_id = nombre_estado, fill = presupuesto/1000000), map = mapa_estados, color = "white") + 
       expand_limits(x = mapa_estados$long, y = mapa_estados$lat) +
-      labs(title ="Presupuesto promedio por Estados", subtitle = "Estados Unidos") + xlab("Longitud") + ylab("Latitud") +
-      theme_bw()
+      labs(title ="Presupuesto promedio por Estados", subtitle = "Estados Unidos") +  xlab("") + ylab("") +
+      theme_bw() + coord_map("albers", lat0=39, lat1=45) +
+      scale_fill_gradientn("Budget ($MM)", colours = rev(rainbow(4))) +
+      geom_text(data = state_name, aes(label =  as.character(region), x = long, y = lat), size = 2.5) 
 g1
 ```
 
@@ -130,10 +147,179 @@ g1
 
 A partir de las variables seleccionadas del *World Development Indicators* de su Tarea 2, represente en un mapa los valores que asume cada variable en 1990 y 2015.
 
+```{r, warning=FALSE, message=FALSE}
+if(!require("pacman")) install.packages("pacman")
+p_load("tidyverse", "WDI", "gridExtra", "grid", "scales", "maps", "ggthemes", "gganimate")
+```
+
+```{r}
+world <- ggplot() + borders("world", colour = "black", fill = "gray80") + theme_map() + coord_cartesian(ylim = c(-50, 90)) 
+```
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+#"NY.GDP.PCAP.PP.CD" -> PIB PPP
+#"BN.CAB.XOKA.GD.ZS" -> balance cuenta corriente como porcentaje del pib
+
+wdi_data <- as.tibble(
+            WDI(indicator = c("NY.GDP.PCAP.PP.CD", "BN.CAB.XOKA.GD.ZS"), 
+                country = "all", 
+                extra = TRUE, 
+                start = 1990, 
+                end = 2015)
+            )
+```
+
+```{r, eval = TRUE, echo = TRUE}
+#"NY.GDP.PCAP.PP.CD" -> PIB PPP
+#"BN.CAB.XOKA.GD.ZS" -> balance cuenta corriente como porcentaje del pib
+
+wdi_data <- wdi_data %>% 
+            select(country:region) %>%
+            dplyr::rename(pib = NY.GDP.PCAP.PP.CD, cuenta_corriente = BN.CAB.XOKA.GD.ZS) %>% 
+            dplyr::filter( year %in% c("1990", "2015") & region != "Aggregates") %>% 
+            na.omit() %>% 
+            group_by(country, year) %>% 
+            arrange(year)
+
+```
+
+```{r}
+wdi_data_pib <- wdi_data %>%
+                select(pib,year,country) %>% 
+                rename(region = country) 
+
+wdi_data_cc <- wdi_data %>%
+               select(cuenta_corriente,year,country) %>% 
+               rename(region = country) 
+```
+
+```{r}
+world_map <- map_data("world") %>% 
+             left_join(wdi_data_pib, by = "region") 
+  
+world_map_animate <- world_map %>% 
+                     select(long, lat, group, year, pib, region) %>% 
+                     arrange(year)
+
+init <- tibble(
+          year = 1990,
+          pib = 0, long = 0, lat = 0
+        )
+
+fin <- tibble(
+          year = 2015,
+          pib = 0, long = 0, lat = 0
+        )
+
+map_animate <- world + 
+               geom_polygon(data = world_map_animate, 
+                            aes(x = long, y = lat, group = group, fill = pib/1000,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0.5) + 
+               geom_polygon(data = init, 
+                            aes(x = long, y = lat, fill = pib,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0) +
+               geom_polygon(data = fin, 
+                            aes(x = long, y = lat, fill = pib,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0) + 
+               labs(title = "Producto Interno Bruto, ") +
+               labs(fill = 'PIB (k)') + 
+               labs(caption = "Mapa por Gabriel Cabrera, @Gabo_Cg\nFuente: World Development Indicators") +
+               theme(plot.title = element_text(hjust = 0.5, vjust = 0.05, size=25)) +
+               theme(plot.caption = element_text(hjust = 0, color="gray40", size=15)) +
+               theme(legend.position = c(.5, -.025), 
+               legend.direction = "horizontal", 
+               legend.title.align = 0,
+               legend.key.size = unit(1.3, "cm"),
+               legend.title=element_text(size=17), 
+               legend.text=element_text(size=13))
+
+gganimate(map_animate, interval = 0.2, title_frame =T, ani.width=1600, ani.height=820, dpi=800, "pib_1990_2015.gif")
+```
+
+<br>
+
+<center>
+
+![Mapa Producto Interno Bruto](pib_1990_2015.gif)
+
+</center>
+
+```{r}
+wdi_data_pib <- wdi_data %>%
+                select(pib,year,country) %>% 
+                rename(region = country) 
+
+wdi_data_cc <- wdi_data %>%
+               select(cuenta_corriente,year,country) %>% 
+               rename(region = country) 
+```
+
+```{r}
+world_map <- map_data("world") %>% 
+             left_join(wdi_data_cc, by = "region") 
+  
+world_map_animate <- world_map %>% 
+                     select(long, lat, group, year, cuenta_corriente, region) %>% 
+                     arrange(year)
+
+init <- tibble(
+          year = 1990,
+          cuenta_corriente = 0, long = 0, lat = 0
+        )
+
+fin <- tibble(
+          year = 2015,
+          cuenta_corriente = 0, long = 0, lat = 0
+        )
+
+map_animate <- world + 
+               geom_polygon(data = world_map_animate, 
+                            aes(x = long, y = lat, group = group, fill = cuenta_corriente,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0.5) + 
+               geom_polygon(data = init, 
+                            aes(x = long, y = lat, fill = cuenta_corriente,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0) +
+               geom_polygon(data = fin, 
+                            aes(x = long, y = lat, fill = cuenta_corriente,
+                                frame = year,
+                                cumulative = FALSE), 
+                            alpha = 0) + 
+               labs(title = "Cuenta Corriente, ") +
+               labs(fill = 'CC') + 
+               labs(caption = "Mapa por Gabriel Cabrera, @Gabo_Cg\nFuente: World Development Indicators") +
+               theme(plot.title = element_text(hjust = 0.5, vjust = 0.05, size=25)) +
+               theme(plot.caption = element_text(hjust = 0, color="gray40", size=15)) +
+               theme(legend.position = c(.5, -.025), 
+               legend.direction = "horizontal", 
+               legend.title.align = 0,
+               legend.key.size = unit(1.3, "cm"),
+               legend.title=element_text(size=17), 
+               legend.text=element_text(size=13))
+
+
+gganimate(map_animate, interval = 0.2, ani.width = 1500, ani.height = 750, "CC_1990_2015.gif")
+```
+
+<br>
+
+<center>
+
+![Mapa Cuenta Corriente](CC_1990_2015.gif)
+
+</center>
 
 <br>
 
 # Pregunta 3 {.tabset -} 
 
 Visite el sitio web [http://datos.gob.cl/](http://datos.gob.cl/) y descargue una base de datos de su preferencia^[Debe contener las comunas de la región Metropolitana.], justificando su elección. Luego, represente los datos seleccionados en un mapa de una o varias de las comunas de la región Metropolitana. Los mapas vectoriales pueden ser descargados de [https://www.bcn.cl](https://www.bcn.cl/siit/mapas_vectoriales).
-

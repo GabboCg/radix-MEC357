@@ -9,10 +9,10 @@ div.quote-container blockquote p {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
     color: #fff;
-    background-color: blue;
-    border-color: blue;
+    background-color: red;
+    border-color: red;
 }
 
 a:link {
-    color: blue;
+    color: red;
 }
