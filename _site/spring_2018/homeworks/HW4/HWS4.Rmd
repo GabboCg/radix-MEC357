@@ -1,0 +1,142 @@
+---
+title: "Pauta Tarea 4"
+author:  <a href="https://gcabrerag.rbind.io/"> <h3> Gabriel Cabrera </h3> </a> \newline Facultad de Economía y Negocios, Universidad de Chile, Chile
+date: "2018-10-15 (updated: `r Sys.Date()`)"
+output: 
+  html_document:
+    highlight: "kate"
+    toc: true
+    css: styles.css
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    code_folding: "show"
+    include:
+      after_body: footer.html
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning=FALSE, message=FALSE)
+```
+
+---
+
+<center> <b> Instrucciones </b> </center>
+<p>
+
+1.	Esta tarea debe ser entregada en grupos de máximo 3 personas. 
+2.	Se debe enviar una carpeta comprimida que contenga: un archivo .Rproj (proyecto en R), un script y un breve informe en R Markdown con sus resultados, incluyendo tablas, gráficos, etc., según corresponda.  El formato del infome puede ser word, pdf y/o html y se debe \textbf{incluir} el archivo Rmd.
+3.  El nombre del archivo comprimido debe ser "Tarea 4-R-Uchile Apellido 1-Apellido 2-Apellido 3".
+4.  El asunto del email con su tarea debe ser "Tarea 4-R-Uchile Apellido 1-Apellido 2-Apellido 3".
+5.	La fecha de entrega es el Jueves 1 de Noviembre del 2018hasta las 23:59 hrs al correo del curso:                      [r2018uchile@gmail.com](r2018uchile@gmail.com). 
+
+---
+
+<div class="quote-container">
+
+> “It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.” 
+>
+> <p align="right"> -- *Sir Arthur Conan Doyle*, Sherlock Holmes </p>
+
+</div>
+
+```{r, results='hide'}
+if(!require("pacman")) install.packages("pacman")
+p_load("tidyverse", "maps", "lubridate", "plotly")
+```
+
+<br>
+
+# Pregunta 1 {-}
+
+1. Realice una simulación donde demuestre que:
+
+    a. Si espera dos cara seguidas, deberá lanzar en promedio 6 veces la moneda.
+    b. Si espera una cara y luego sello, deberá lanzar en promedio 4 veces la moneda.
+
+<br>
+
+# Pregunta 2 {.tabset -} 
+
+Utilizando las siguientes bases de datos:
+
+a. **IMDb dataset**: Contiene información de películas obtenida desde [IMDb](https://www.imdb.com/) hasta 2017. Es la misma utilizada en la Tarea 1 y Tarea 3. Se encuentra adjunta en la carpeta *IMDb dataset*.
+
+| Base de datos              | Descripción                                 |
+|----------------------------|---------------------------------------------|
+| *genres.csv*               | Géneros de cada película.                   |
+| *keywords.csv*             | Palabras claves de cada película.           |
+| *production_companies.csv* | Compañía a cargo de la producción.          |
+| *production_countries.csv* | Países donde se realizá la producción.      |
+| *movie_dataset.csv*        | Base de datos principal.                    |
+
+
+Table: Breve descripción de *IMDb dataset*
+
+
+b. **R Ladies dataset**: R Ladies es una organización mundial que busca promover la diversidad de género en la comunidad R. Su objetivo es generar un espacio colaborativo amigable para intercambiar ideas, experiencias y conocimientos, y así hacer R más popular y accesible. La base a utilizar se en encuentra en: https://raw.githubusercontent.com/d4tagirl/R-Ladies-growth-maps/master/rladies.csv y sus variables son:
+
+
+| Variables                  | Descripción                                 |
+|----------------------------|---------------------------------------------|
+| *screen_name*              | ID de la organización (e.g *RLadiesBoston*).|
+| *location*                 | Locación de la organización.                |
+| *created_at*               | Fecha que fue creada la organización.       |
+| *followers*                | Número de seguidores.                       |
+| *age_days*                 | Días de antiguedad.                         |
+| *lon*                      | Longitud.                                   |
+| *lat*                      | Latitud.                                    |
+
+Table: Breve descripción de *R Ladies dataset*
+
+Deberá construir **un Dashboard**^[Cada gráfico y/o tabla debe ser interactivo. Librerías utiles: plotly, ggplotly y/o highchart.]  con las siguientes características:
+
+## Dashboard: Películas {-}
+
+### Parte 1 {-}
+ 
+a. Asumiendo que la variable *vote_average* es el voto final que tuvo la película, presente en un mapa el voto promedio por estado. El mapa debe tener:
+
+    * El nombre de cada estado, puede ser el zip code o el nombre.
+    * Agregar los estados restantes, Alaska y Hawaii.
+    
+    <p>
+    
+b. Presente en un mapa la cantidad de películas por estado. El mapa debe tener:
+
+    * El nombre de cada estado, puede ser el zip code o el nombre.
+    * Agregar los estados restantes, Alaska y Hawaii.
+    
+    <p>
+    
+c. Utilizando **un gráfico** de su elección identifique y muestre la cantidad de películas por género pero separándolos por país de producción.
+
+d. Usando un gráfico de barra , identifique las 10 películas con mayor popularidad.
+    
+### Parte 2 {-}
+
+a. Genere un gráfico de barra que presente la cantidad de películas estrenada por año.
+
+b. Genere un gráfico de barra que presente las ganancias (*revenue* - *budget*) sobre USD$ 1000 millones de las compañias de producción.
+
+c. Usando un pie chart, muestre las películas estrenadas por década.
+
+d. Usando un pie chart, identifique los 10 idiomas más utilizados en las películas.
+
+
+## Dashboard: R Ladies {-}
+
+a. Usando la geolocalización de cada organización, muestre los *followers* usando una mapa. Tener en cuenta que los valores no son a nivel de país.
+
+b. Construya un gráfico o tabla de su interés.
+
+
+
+
+
+
+
+
