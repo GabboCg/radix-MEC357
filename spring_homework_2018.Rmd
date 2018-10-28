@@ -1,7 +1,7 @@
 ---
 title: "Tareas Primavera 2018"
 description: |
-  A continuación se encuentran la pauta parcial de las tareas, es decir, solo el código. El código tanto de la página en Redix como el R Markdown se encuentran en github. 
+  A continuación se encuentran la pauta parcial de las tareas, es decir, solo el código. El código tanto de la página en Redix como el R Markdown se encuentran en github `r emo::ji("heart")` `r emo::ji("heart")` `r emo::ji("heart")`. 
 ---
 
 ```{r setup, include=FALSE}

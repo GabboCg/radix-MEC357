@@ -1,7 +1,8 @@
 ---
 title: "R para economía y negocios"
 description: |
-  Welcome to the website. I hope you enjoy it!
+  Bienvenido al curso `r emo::ji("nerd_face")`
+  
 site: radix::radix_website
 ---
 
