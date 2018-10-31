@@ -72,13 +72,14 @@ $$
 Por lo tanto, el modelo a estimar es el siguiente:
        
 $$
-y =\beta_{0} + \beta_{1}x + v$, donde  $v = u + e_0
+y =\beta_{0} + \beta_{1}x + v
 $$
-         
+
+donde  $v = u + e_0$       
 
 La siguiente tabla describe los valores a usar en las simulaciones:
    
-|           |                    |
+| Parametro | valor              |
 |-----------|--------------------|
 | R         | 10000 repeticiones |
 | N         | 25,50,100,1000     |
@@ -116,13 +117,15 @@ $$
 Por lo tanto, el modelo a estimar es el siguiente:
            
 $$
-y =\beta_{0} + \beta_{1}x + v$, donde  $v = u - \beta_1 e_1
+y =\beta_{0} + \beta_{1}x + v
 $$
+
+donde  $v = u - \beta_1 e_1%$
 
            
 La siguiente tabla describe los valores a usar en las simulaciones:
            
-|           |                    |
+| Parametro | valor              |
 |-----------|--------------------|
 | R         | 10000 repeticiones |
 | N         | 25,50,100,1000     |
@@ -165,7 +168,9 @@ Table: Descripción Variables
 Construya una función que le permita estimar por MCO las siguientes especificaciones (*30 puntos*):
 
 a. $gy7509 = \alpha + \beta_1 meanki$
+
 b. $gy7509 = \alpha + \beta_1 meanki + \beta_2 gpop$
+
 c. $gy7509 = \alpha + \beta_1 meanki + \beta_2 gpop + \beta_3 rgdpch1975$
 
 <br>
