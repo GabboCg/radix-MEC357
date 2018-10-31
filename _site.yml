@@ -15,7 +15,7 @@ navbar:
     - text: "Tareas"
       menu:
         - text: "Otoño 2018"
-          href: spring_homework_2018.html
+          href: autumn_homework_2018.html
         - text: "Primavera 2018"
           href: spring_homework_2018.html
     - text: "Controles"
