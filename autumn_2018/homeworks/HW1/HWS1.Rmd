@@ -1,0 +1,142 @@
+---
+title: "Pauta Tarea 1"
+author:  <a href="https://gcabrerag.rbind.io/"> <h3> Gabriel Cabrera </h3> </a> \newline Facultad de Economía y Negocios, Universidad de Chile, Chile
+date: "2018-10-15 (updated: `r Sys.Date()`)"
+linkcolor: "red"  
+output: 
+  html_document:
+    highlight: "kate"
+    toc: true
+    css: styles.css
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    code_folding: "show"
+    include:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+---
+
+<center> <b> Instrucciones </b> </center>
+<p>
+
+1.	La Tarea 1 consiste en 3 preguntas, las que deben ser realizadas completamente en lenguaje R, utilizando las librerías y/o herramientas explicadas en la cátedra y ayudantía. Los grupos deben tener un máximo de 3 integrantes.
+2.	Cuando se solicite graficar (ggplot2) se espera que el gráfico incluya labels, leyenda y título.
+3.	Se debe enviar un script y un breve informe con sus resultados, incluyendo tablas, gráficos, etc., según corresponda.  El formato del infome puede ser word o pdf.
+4.	La fecha de entrega es el sábado 28 de abril del 2018 hasta las 23:59 hrs al correo del curso: [r2018uchile@gmail.com](r2018uchile@gmail.com). 
+
+---
+
+<div class="quote-container">
+
+> “It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.” 
+>
+> <p align="right"> -- *Sir arthur conan doyle*</p>
+
+</div>
+
+# Pregunta 1 {.tabset - .tabset-fade}
+
+
+
+## Pregunta 1.1 {-}
+
+Seleccione dos variables de su interés del World Development Indicators para el año 1990 y 2010. Incluya todos los países presentes en la base de datos, excluyendo los agregados regionales. Explique brevemente por qué son relevantes, argumentando a partir de conocimientos de cursos previos y/o trabajos empíricos.
+
+<br>
+
+## Pregunta 1.2 {-}
+
+Construya un data frame y presente los valores máximos, mínimos, media aritmética, mediana y desviación estándar que permita comparar los valores de cada variable en los años 1990 y 2010. 
+
+<br>
+
+## Pregunta 1.3 {-}
+
+Grafique un boxplot para cada una de las variables que permita la comparación de 1990 y 2010. Interprete.
+
+<br>
+
+## Pregunta 1.4 {-}
+
+Use un scatter plot donde se visualice la relación entre ambas variables para cada año.  
+
+<br>
+
+## Pregunta 1.5 {-}
+
+Represente en un mapa los valores que asume cada variable en 1990 y 2010.
+
+
+<br>
+
+# Pregunta 2 {.tabset - .tabset-fade}
+
+A continuación deberá trabajar con una muestra aleatoria de la \href{https://drive.google.com/uc?export=download&id=1TROI9SgGTZIU1JQrNY4kjis0RUzhqar-}{Cuarta Encuesta Longitudinal de Empresas} (ELE-4) (se seleccionó un 50% de la muestra original). El cuestionario y los informes correspondientes se encuentran en la página web del \href{http://www.economia.gob.cl/estudios-y-encuestas/cuarta-encuesta-longitudinal-de-empresas-ele-4}{Ministerio de Economía}. Una vez importada la base de datos, se recomienda caracterizar el tipo de datos que constituyen las variables con las que se va a trabajar. 
+
+
+## Pregunta 2.1 {-}
+
+Caracterice la distribución porcentual de empresas por sector y tamaño respecto al total de empresas en cada estrato el año 2016. Grafique y describa los resultados.
+
+<br>
+
+## Pregunta 2.2 {-}
+
+Caracterice la distribución porcentual de empresas en términos de su organización jurídica por tamaño de empresa. Grafique y describa los resultados.
+
+<br>
+
+## Pregunta 2.3 {-}
+
+Caracterice la edad de las empresas, de acuerdo a la fecha de inicio de sus actividades en el SII. Grafique la distribución acumulada, eliminando las empresas mayores de 50 años. 
+
+<br>
+
+## Pregunta 2.4 {-}
+
+Grafique la relación existente entre disponibilidad de personal calificado y actividades de I+D. Elimine otros servicios e identifique las firmas según el siguiente criterio:
+
+Table: Criterio de identificación
+
+| Sector económico                                       | Símbolo       | 
+| ------------------------------------------------------ |:-------------:| 
+|  Agricultura, ganadería, silvicultura y pesca          | A             |
+|  Explotación de minas y canteras                       | B             |
+|  Industrias manufactureras                             | C             |
+|  Construcción                                          | F             |
+|  Comercio al por mayor y al por menor                  | G             |
+|  Transporte y almacenamiento                           | F             |
+|  Actividades de alojamiento y de servicios de comidas  | H             |
+|  Información y comunicaciones                          | J             |
+|  Actividades financieras y de seguros                  | K             |
+|  Actividades profesionales, científicas y técnicas     | M             |
+|  Suministro de electricidad, gas y agua                | X             |
+|  Actividades de servicios                              | Y             |
+
+
+<br>
+
+# Pregunta 3 {.tabset - .tabset-fade}
+
+Un Analista Financiero se entera que usted sabe usar y descargar datos utilizando el lenguaje R, por lo que muy interesado le pide:
+
+## Pregunta 3.1 {-}
+
+Descargar el índice diario del S&P 500 (ˆGSPC) desde inicio del 2000 hasta finales del 2017.
+
+## Pregunta 3.2 {-}
+
+Calcular el retorno diario y grafíquelo. 
+
+## Pregunta 3.3 {-}
+
+El analista sabe que una forma de ver las desviaciones del retorno son las Bandas de Bollinger, por lo que explique brevemente su significado. Grafique las bandas desde el 2001. (Hint: lea el ayuda de la función rollmean que viene por defecto con R)
+
