@@ -15,10 +15,14 @@ knitr::opts_chunk$set(echo = FALSE)
 # Tarea 1
 
 <p>
-<img src="images/images_hw1.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
-margin-left: 80px ; border: solid black 1px; padding: 2px">
+<img src="images/images_hw1_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 40px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.
+
+<button class="button" onclick="myFunction()"> 
 [**Tarea 1**](autumn_2018/homeworks/HW1/HWS1.html)
+</button>
+
 </p>
 
 ---
@@ -26,10 +30,14 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 # Tarea 2 
 
 <p>
-<img src="images/images_hw2.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
-margin-left: 80px ; border: solid black 1px; padding: 2px">
+<img src="images/images_hw2_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 40px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+
+<button class="button" onclick="myFunction()"> 
 [**Tarea 2**](autumn_2018/homeworks/HW2/HWS2.html)
+</button>
+
 </p>
 
 ---
@@ -37,10 +45,14 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 # Tarea 3
 
 <p>
-<img src="images/images_hw3.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
-margin-left: 80px ; border: solid black 1px; padding: 2px">
+<img src="images/images_hw3_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 40px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+
+<button class="button" onclick="myFunction()"> 
 [**Tarea 3**](autumn_2018/homeworks/HW3/HWS3.html)
+</button>
+
 </p>
 
 ---
@@ -49,8 +61,12 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 
 <p>
 <img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
-margin-left: 80px ; border: solid black 1px; padding: 2px">
+margin-left: 40px ; border: solid black 1px; padding: 2px">
 A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+
+<button class="button" onclick="myFunction()"> 
 [**Tarea 4**](autumn_2018/homeworks/HW4/HWS4.html)
+</button>
+
 </p>
 
