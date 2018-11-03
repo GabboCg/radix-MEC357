@@ -51,8 +51,8 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 3**](spring_2018/homeworks/HW3/HWS3.html)
-
 </button>
+
 </p>
 
 ---
@@ -67,5 +67,6 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 <button class="button" onclick="myFunction()"> 
 [**Tarea 4**](spring_2018/homeworks/HW4/HWS4.html)
 </button>
+
 </p>
 
