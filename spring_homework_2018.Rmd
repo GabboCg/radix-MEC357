@@ -1,7 +1,7 @@
 ---
 title: "Tareas Primavera 2018"
 description: |
-  A continuación se encuentran la pauta parcial de las tareas, es decir, solo el código como el enunciado. El código tanto de la página en Redix como el R Markdown se encuentran en un repositorio en [**github**](https://github.com/GaboCg) `r emo::ji("heart")` `r emo::ji("heart")` `r emo::ji("heart")`. 
+  A continuación se encuentran la pauta parcial de las tareas, es decir, solo el código como el enunciado. El código tanto de la página en Redix como el R Markdown se encuentran en un repositorio en `r emo::ji("heart")` [**Github**](https://github.com/GaboCg) `r emo::ji("heart")`. 
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-# Tarea 1
+# Tarea 1 `r emo::ji("movie_camera")`
 
 <p>
 <img src="images/images_hw1.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -27,7 +27,7 @@ El objetivo de la Tarea 1 es introducir el uso de la librería `dplyr` y `magrit
 
 ---
 
-# Tarea 2 
+# Tarea 2 `r emo::ji("chart_with_upwards_trend")`
 
 <p>
 <img src="images/images_hw2.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -42,7 +42,7 @@ El objetivo de la tarea 2 es relacionar el uso  de R con las finanzas. Utilizand
 
 ---
 
-# Tarea 3
+# Tarea 3 `r emo::ji("globe_with_meridians")`
 
 <p>
 <img src="images/images_hw3.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -57,7 +57,7 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 
 ---
 
-# Tarea 4
+# Tarea 4 `r emo::ji("world_map")`
 
 <p>
 <img src="images/images_hw4.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
