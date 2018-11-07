@@ -1,7 +1,7 @@
 ---
 title: "R para economía y negocios"
 description: |
-  Bienvenido al curso `r emo::ji("nerd_face")`
+  Bienvenido al curso `r emo::ji("nerd_face")`. Realizado con `r emo::ji("heart")`+ `r emo::ji("coffee")` + `r emo::ji("clock9")`
   
 site: radix::radix_website
 ---
