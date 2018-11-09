@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <p>
 <img src="images/images_hw1_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.
+Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 1**](autumn_2018/homeworks/HW1/HWS1.html)
@@ -32,7 +32,7 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 <p>
 <img src="images/images_hw2_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+Próximamente...   
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 2**](autumn_2018/homeworks/HW2/HWS2.html)
@@ -47,7 +47,7 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 <p>
 <img src="images/images_hw3_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 3**](autumn_2018/homeworks/HW3/HWS3.html)
@@ -62,7 +62,7 @@ A paragraph with a floating image. A paragraph with a floating image. A paragrap
 <p>
 <img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-A paragraph with a floating image. A paragraph with a floating image. A paragraph with a floating image.  
+Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 4**](autumn_2018/homeworks/HW4/HWS4.html)

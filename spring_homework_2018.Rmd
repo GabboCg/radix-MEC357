@@ -79,7 +79,7 @@ La base de datos usada proviene de IMdB.
 <p>
 <img src="images/images_hw5.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-Proximamente...
+Próximamente...
 
 <button class="button" onclick="myFunction()"> 
 [**Tarea 5**](spring_2018/homeworks/HW5/HWS5.html)
