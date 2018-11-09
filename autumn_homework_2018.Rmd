@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-# Tarea 1
+# Tarea 1 `r emo::ji("bar_chart")`
 
 <p>
 <img src="images/images_hw1_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -27,7 +27,7 @@ Próximamente...
 
 ---
 
-# Tarea 2 
+# Tarea 2 `r emo::ji("notebook")`
 
 <p>
 <img src="images/images_hw2_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -42,7 +42,7 @@ Próximamente...
 
 ---
 
-# Tarea 3
+# Tarea 3 `r emo::ji("cd")`
 
 <p>
 <img src="images/images_hw3_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
@@ -57,7 +57,7 @@ Próximamente...
 
 ---
 
-# Tarea 4
+# Tarea 4 `r emo::ji("computer")`
 
 <p>
 <img src="images/tarea_1.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
