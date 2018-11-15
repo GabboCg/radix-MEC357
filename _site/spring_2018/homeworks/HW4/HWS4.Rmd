@@ -1,5 +1,5 @@
 ---
-title: "Dashboard: Homework 3"
+title: "Dashboard: Homework 4"
 author: "Gabriel Cabrera" 
 output: 
   flexdashboard::flex_dashboard:
@@ -298,7 +298,7 @@ Row {.tabset data-width=400}
 ```{r}
 rladies %>%  
   arrange(z) %>% 
-  hchart(type = "column", hcaes(x = "name", y = "z"), colorByPoint = TRUE, name = "Ganancia") %>% 
+  hchart(type = "column", hcaes(x = "name", y = "z"), colorByPoint = TRUE, name = "Seguidores") %>% 
   hc_yAxis(title = list(text = "Seguidores")) %>% 
   hc_xAxis(title = list(text = "Ubicación"))
 ```
