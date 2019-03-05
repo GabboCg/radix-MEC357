@@ -1,3 +1,31 @@
+# Useful links
+
+| Link | Description |
+| --- | --- |
+| [:link:](https://www.rfordatasci.com) | The R4DS Online Learning Community Website|
+| [:link:](http://r4ds.had.co.nz/) | The R for Data Science textbook |
+| [:link:](https://carbon.now.sh/) | Carbon for sharing beautiful code pics |
+| [:link:](https://github.com/MilesMcBain/gistfo) | Post gist to Carbon from RStudio |
+| [:link:](https://github.com/yonicd/carbonate) | Post to Carbon from RStudio |
+| [:link:](https://github.com/join) | Join GitHub! |
+| [:link:](https://guides.github.com/activities/hello-world/) | Basics of GitHub |
+| [:link:](https://happygitwithr.com/) | Learn how to use GitHub with R |
+| [:link:](http://ggplot2.tidyverse.org/reference/ggsave.html) | Save high-rez `ggplot2` images |
+
+# Useful data sources
+
+| Link | Description |
+| --- | --- |
+| [:link:](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0) | Data is Plural collection |
+| [:link:](https://github.com/BuzzFeedNews/everything/blob/master/README.md) | BuzzFeedNews GitHub |
+| [:link:](https://github.com/theeconomist/) | The Economist GitHub |
+| [:link:](https://cran.r-project.org/web/packages/fivethirtyeight/fivethirtyeight.pdf) | The `fivethirtyeight` data package 
+| [:link:](https://github.com/TheUpshot) | The Upshot by NY Times |
+| [:link:](https://github.com/baltimore-sun-data) | The Baltimore Sun Data Desk |
+| [:link:](https://github.com/datadesk) | The LA Times Sun Data Desk |
+| [:link:](https://github.com/OpenNewsLabs/news-graphics-team) | Open News Labs |
+| [:link:](https://t.co/BMvJO2dT1o) | BBC Data Journalism team |
+
 # Libros Data Viz/Science
 
 Only books available freely online are sourced here. Feel free to add to the list
