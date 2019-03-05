@@ -1,6 +1,6 @@
-# Useful links
+# Enlaces útiles
 
-| Link | Description |
+| Link | Descripción |
 | --- | --- |
 | [:link:](https://www.rfordatasci.com) | The R4DS Online Learning Community Website|
 | [:link:](http://r4ds.had.co.nz/) | The R for Data Science textbook |
@@ -12,9 +12,9 @@
 | [:link:](https://happygitwithr.com/) | Learn how to use GitHub with R |
 | [:link:](http://ggplot2.tidyverse.org/reference/ggsave.html) | Save high-rez `ggplot2` images |
 
-# Useful data sources
+# Fuente de datos útiles
 
-| Link | Description |
+| Link | Descripción |
 | --- | --- |
 | [:link:](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0) | Data is Plural collection |
 | [:link:](https://github.com/BuzzFeedNews/everything/blob/master/README.md) | BuzzFeedNews GitHub |
