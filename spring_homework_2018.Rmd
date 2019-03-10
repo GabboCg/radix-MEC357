@@ -20,7 +20,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 El objetivo de la Tarea 1 es introducir el uso de la librería `dplyr` y `magrittr` con su operador %>%, ambos coexisten en el `tidyverse`. La base de datos usada proviene de IMdB.
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 1**](spring_2018//homeworks/HW1/HWS1.html)
+[**Tarea 1**](homework/2018/spring/hw1/hws1.html)
 </button>
 
 </p>
@@ -35,7 +35,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 El objetivo de la Tarea 2 es relacionar el uso  de R con las finanzas. Utilizando la librería `tidyquant`, calculamos bandas de *bollinger* y *barcharts*. Finalmente se usa la librería `WDI` para descargar datos externos a R como el *World Development Indicator*.   
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 2**](spring_2018/homeworks/HW2/HWS2.html)
+[**Tarea 2**](homework/2018/spring/hw2/hws2.html)
 </button>
 
 </p>
@@ -50,7 +50,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Mediante el uso de mapas presentar y visualizar datos mundiales. A nivel nacional se entrega la libertad de seleccionar datos de la regiòn metropolitana y mapear a nivel de comuna (Santiago). Librerìas usadas: `leaflet`, `tmap` y `plotly`, no obstante la pauta esta contruida utilizando `gganimate`.
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 3**](spring_2018/homeworks/HW3/HWS3.html)
+[**Tarea 3**](homework/2018/spring/hw3/hws3.html)
 </button>
 
 </p>
@@ -66,7 +66,7 @@ Una imagen vale mas que mil palabras, la frase anterior resume el uso de *Dashbo
 La base de datos usada proviene de IMdB.
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 4**](spring_2018/homeworks/HW4/HWS4.html)
+[**Tarea 4**](homework/2018/spring/hw4/hws4.html)
 </button>
 
 </p>
@@ -82,7 +82,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Próximamente...
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 5**](spring_2018/homeworks/HW5/HWS5.html)
+[**Tarea 5**](homework/2018/spring/hw5/hws5.html)
 </button>
 
 </p>

@@ -20,7 +20,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 1**](autumn_2018/homeworks/HW1/HWS1.html)
+[**Tarea 1**](homework/2018/autumn/hw1/hws1.html)
 </button>
 
 </p>
@@ -35,7 +35,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Próximamente...   
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 2**](autumn_2018/homeworks/HW2/HWS2.html)
+[**Tarea 2**](homework/2018/autumn/hw2/hws2.html)
 </button>
 
 </p>
@@ -50,7 +50,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 3**](autumn_2018/homeworks/HW3/HWS3.html)
+[**Tarea 3**](homework/2018/autumn/hw3/hws3.html)
 </button>
 
 </p>
@@ -65,7 +65,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 Próximamente... 
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 4**](autumn_2018/homeworks/HW4/HWS4.html)
+[**Tarea 4**](homework/2018/autumn/hw4/hws4.html)
 </button>
 
 </p>
