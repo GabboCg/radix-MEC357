@@ -17,7 +17,11 @@ navbar:
         - text: "Otoño 2018"
           href: autumn_homework_2018.html
         - text: "Primavera 2018"
-          href: spring_homework_2018.html  
+          href: spring_homework_2018.html
+        - text: "Otoño 2019"
+        - text: "---"
+        - text: "Controles"
+        - text: "Examenes"
     - icon: fa-question fa-lg
       href: https://gcabrerag.rbind.io/
     - icon: fab fa-github
