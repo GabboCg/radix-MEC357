@@ -1,0 +1,94 @@
+---
+title: "Pauta Tarea 2"
+author:  <a href="https://gcabrerag.rbind.io/"> <h3> Gabriel Cabrera </h3> </a> \newline Facultad de Economía y Negocios, Universidad de Chile, Chile
+date: "2018-10-15 (updated: `r Sys.Date()`)"
+linkcolor: "red"  
+output: 
+  html_document:
+    highlight: "kate"
+    toc: true
+    css: styles.css
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    code_folding: "show"
+    include:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+---
+
+<center> <b> Instrucciones </b> </center>
+<p>
+
+1.	La Tarea 1 consiste en 3 preguntas, las que deben ser realizadas completamente en lenguaje R, utilizando las librerías y/o herramientas explicadas en la cátedra y ayudantía. Los grupos deben tener un máximo de 3 integrantes.
+2.	Cuando se solicite graficar (ggplot2) se espera que el gráfico incluya labels, leyenda y título.
+3.	Se debe enviar un script y un breve informe con sus resultados, incluyendo tablas, gráficos, etc., según corresponda.  El formato del infome puede ser word o pdf.
+4.	La fecha de entrega es el sábado 28 de abril del 2018 hasta las 23:59 hrs al correo del curso: [r2018uchile@gmail.com](r2018uchile@gmail.com). 
+
+---
+
+<div class="quote-container">
+
+> “Happy families are all alike; every unhappy family is unhappy in its own way.” 
+>
+> <p align="right"> *Leo Tolstoy*</p>
+
+> “Tidy datasets are all alike; but every messy dataset is messy in its own way.” 
+>
+> <p align="right"> *Hadley Wickham*</p>
+
+</div>
+
+<br>
+
+# Pregunta 1 {.tabset - .tabset-fade}
+
+Usando datos distintos a los usados en clases (comunas de la RM y % de población mayor a 60 años),  baje los mapas vectoriales de la Biblioteca del Congreso Nacional de Chile para las comunas o regiones de Chile y represente la distribución territorial de una variable de su interés. 
+
+<br>
+
+# Pregunta 2 {.tabset - .tabset-fade}
+
+El Problema de Monty Hall es un problema de probabilidad que está inspirado por el concurso televisivo estadounidense *\href{https://ed.ted.com/on/fiCWblWX}{Let's Make a Deal}*, famoso entre 1963 y 1986. Su nombre proviene de su presentador, Monty Hall.
+
+En este concurso, el concursante escoge una puerta entre tres, y su premio consiste en lo que se encuentra detrás. Una de ellas oculta un coche, y tras las otras dos hay una cabra. Sin embargo, antes de abrirla, el presentador, que sabe donde esta el premio, abre una de las otras dos puertas y muestra que detrás de ella hay una cabra. Ahora tiene el concursante una última oportunidad de cambiar la puerta escogida ¿Debe el concursante mantener su elección original o escoger la otra puerta? ¿Hay alguna diferencia?
+
+## Pregunta 2.1 {-}
+
+Explique y genere una simulación del problema considerando las siguientes estrategias: (*Hint*: revise la opción mod de la librería *pracma*). (*20 puntos*)
+  
+a. Nunca cambiar de puerta.
+
+b. Siempre cambiar de puerta.
+
+<br>
+
+## Pregunta 2.2 {-}
+
+Grafique usando un *stacked Bar* las 3 opciones (puerta ganadora\footnote{Si consideramos la opción puerta ganadora, se debería ver la proporción de veces que  la puerta 1, puerta 2 y puerta 3 fue la gandora en la simulación}, jugada inicial y elección de Monty) y aquella que muestre el porcentaje de veces ganadas por sobre las perdidas. Repita este ejercicios con N igual a 100, 1000, 10000, 100000, ¿Qué se observa?.
+
+<br>
+
+# Pregunta 3 {.tabset - .tabset-fade}
+
+## Pregunta 3.1 {-}
+
+Utilizando un *while loop*, encuentre cuantos intentos se necesitan para obtener tres caras seguidas al lanzar una moneda. Explique su código. (10 puntos)
+
+## Pregunta 3.2 {-}
+
+Utilzando los datos de la carpeta datasets:
+
+a. Programe una función que le permita unir los cuatros archivos en un solo objeto.
+    
+b. Programe una función que le permita calcular el promedio, la mediana, desviación estandar, valor mínimo y maximo de las 8 variables. La función debe ser capaz de mostrar todo los valores en la consola, ¿qué concluye? 
+    
+c. Finalmente construya una función que logre generar un *scatter plot* usando ggplot2. ¿cambia su conclusión anterior? 
+

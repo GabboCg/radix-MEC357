@@ -8,7 +8,6 @@ output:
     highlight: "kate"
     toc: true
     css: styles.css
-    code_download: true
     toc_depth: 2
     toc_float:
       collapsed: false

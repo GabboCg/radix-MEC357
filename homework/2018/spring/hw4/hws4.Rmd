@@ -1,0 +1,306 @@
+---
+title: "Dashboard: Homework 4"
+author: "Gabriel Cabrera" 
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: "united"
+    social: [ "twitter", "github", "menu" ]
+    source_code: embed
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+if(!require("pacman")) install.packages("pacman")
+p_load("flexdashboard", "tidyverse", "treemap", "viridisLite", "highcharter", "plotly", "lubridate")
+
+thm <- hc_theme(
+         colors = c("#1a6ecc", "#434348", "#90ed7d"),
+         chart = list(
+          backgroundColor = "transparent",
+          style = list(fontFamily = "Source Sans Pro")
+        ),
+          xAxis = list(
+            gridLineWidth = 1
+          )
+       )
+
+n <- 4
+colstops <- data.frame(
+  q = 0:n/n,
+  c = substring(viridis(n + 1), 0, 7)) %>%
+  list_parse2()
+
+simpleCap <- function(x) {
+              s <- strsplit(x, " ")[[1]]
+              k <- paste(toupper(substring(s, 1,1)), substring(s, 2),
+                    sep="", collapse=" ")
+              k
+            }
+```
+
+
+Parte 1 {data-navmenu="Películas" data-icon="fa-list"}
+=====================================     
+
+Column 
+-----------------------------------------------------------------------
+### Voto promedio por estados
+
+```{r}
+production_countries <- read.csv("Datasets/production_countries.csv")
+production_companies <- read.csv("Datasets/production_companies.csv")
+movie_dataset <- read.csv("Datasets/movie_dataset.csv")
+estados <- read.csv("Datasets/estados.csv")
+keywords <- read.csv("Datasets/keywords.csv")
+genres <- read.csv("Datasets/genres.csv")
+spoken <- read.csv("Datasets/spoken_languages.csv")
+
+states <- c(as.matrix(estados)) 
+```
+
+
+```{r}
+vote_country <- keywords %>% 
+                left_join(movie_dataset, by = "id") %>% 
+                filter(keywords %in% states) %>% 
+                group_by(keywords) %>% 
+                summarise(mean(vote_average)) %>%
+                rename(state = keywords, voto = `mean(vote_average)`) %>%
+                right_join(                             
+                      tibble(state=as.character(states)),  
+                      by="state"                    
+                    ) %>% 
+                rbind.data.frame(c("Hawaii", 0)) %>% 
+                rbind.data.frame(c("Alaska", 0)) %>% 
+                mutate(voto = as.numeric(voto)) %>% 
+                mutate(
+                  voto = ifelse(is.na(voto),0,round(voto,2))    
+                ) 
+
+for(i in 1:nrow(vote_country)){
+
+  vote_country$state[i] <-  simpleCap(vote_country$state[i])
+   
+}
+
+
+highchart() %>%
+  hc_add_series_map(usgeojson, vote_country, name = "Estado",
+    value = "voto", joinBy = c("woename", "state"),
+    dataLabels = list(enabled = TRUE,
+      format = '{point.name}')) %>%
+  hc_colorAxis(stops = colstops) %>%
+  hc_legend(valueDecimals = 0, valueSuffix = "%") %>%
+  hc_mapNavigation(enabled = TRUE) %>%
+  hc_add_theme(thm)
+```
+
+### Cantidad de películas por estados
+
+```{r}
+number <- keywords %>% 
+          filter(keywords %in% states) %>% 
+          group_by(keywords) %>% 
+          mutate(n = n()) %>% 
+          filter(row_number(keywords) == 1) %>% 
+          rename(state = keywords, count = n) %>% 
+          select(state, count) %>% 
+          ungroup() %>% 
+          mutate(state = as.character(state))%>% 
+          right_join(                             
+                      tibble(state=as.character(states)),  
+                      by="state"                    
+                    ) %>% 
+          mutate(
+                  count=ifelse(is.na(count),0,count)    
+                ) %>% 
+          rbind.data.frame(c("Hawaii", 0)) %>% 
+          rbind.data.frame(c("Alaska", 0)) %>% 
+          mutate(count = as.numeric(count) )
+
+for(i in 1:nrow(number)){
+
+  number$state[i] <-  simpleCap(number$state[i])
+   
+}
+
+highchart() %>%
+  hc_add_series_map(usgeojson, number, name = "Estado",
+    value = "count", joinBy = c("woename", "state"),
+    dataLabels = list(enabled = TRUE,
+      format = '{point.name}')) %>%
+  hc_colorAxis(stops = colstops) %>%
+  hc_legend(valueDecimals = 0, valueSuffix = "%") %>%
+  hc_mapNavigation(enabled = TRUE) %>%
+  hc_add_theme(thm)
+```
+
+
+Column {.tabset data-width=400}
+-----------------------------------------------------------------------
+
+### Peliculas por categoría (género)
+
+```{r}
+categoria <- genres %>% 
+             left_join(production_countries, by = "id") %>% 
+             select(genres, production_countries) %>% 
+             group_by(genres)
+
+tree_map <- categoria %>%
+            mutate(category = gsub(" ", "-",production_countries),
+              subcategory = gsub(" ", "-", genres)) %>%
+            group_by(category, subcategory) %>% 
+            summarise(peliculas = n()) %>% 
+            ungroup() %>% 
+            group_by(category) %>% 
+            mutate(n = n()) %>% 
+            arrange(n) %>% 
+            filter(n>=15)
+
+tm <- treemap(tree_map, index = c("category", "subcategory"),
+              vSize = "peliculas", vColor = "peliculas",
+              type = "value", palette = rev(viridis(6)))
+
+highchart() %>% 
+  hc_add_series_treemap(tm, allowDrillToNode = TRUE,
+    layoutAlgorithm = "squarified") %>% 
+  hc_add_theme(thm)
+```
+
+### Top 10 pelìculas según popularidad
+
+```{r}
+popularidad <- movie_dataset %>% 
+               left_join(production_countries, by = "id") %>% 
+               select(title, popularity) %>% 
+               group_by(title) %>% 
+               filter(row_number(title) == 1) %>% 
+               arrange(popularity) %>% 
+               tail(10) %>% 
+               ungroup() %>% 
+               mutate(popularity = round(popularity,2))
+
+hchart(popularidad, type = "bar", hcaes(x = "title", y = "popularity"), colorByPoint = TRUE, name = "Popularidad") %>% 
+  hc_yAxis(title = list(text = "Titulo")) %>% 
+  hc_xAxis(title = list(text = "Popularidad"))
+```
+
+
+
+Parte 2 {data-navmenu="Películas" data-orientation=rows data-icon="fa-list"} 
+=====================================     
+
+Row {.tabset data-width=400}
+-----------------------------------------------------------------------
+
+### Películas estrenada por fecha
+
+```{r}
+movie_dataset %>%
+  mutate(date = year(release_date)) %>% 
+  group_by(date) %>% 
+  mutate(n = n()) %>% 
+  select(date, n) %>% 
+  filter(row_number(date) == 1) %>% 
+  arrange(date) %>% 
+  filter(date < 2017) %>% 
+  hchart(type = "column", hcaes(x = "date", y = "n"), colorByPoint = TRUE, name = "N° Estreno") %>% 
+  hc_yAxis(title = list(text = "Número de lanzamiento")) %>% 
+  hc_xAxis(title = list(text = "Años"))
+```
+
+### Ganancias totales por compañia de producción
+
+```{r}
+production_companies %>% 
+  left_join(movie_dataset, by = "id") %>% 
+  select(title, production_companies, budget, revenue) %>% 
+  group_by(title) %>% 
+  mutate(duplicated = n()) %>% 
+  dplyr::ungroup() %>% 
+  mutate(presupuesto = round((revenue - budget)/1000000, 2),
+         presupuesto_comp =  round(presupuesto/duplicated, 2)) %>% 
+  group_by(production_companies) %>% 
+  mutate(total = sum(presupuesto_comp)) %>% 
+  filter(row_number(production_companies) == 1) %>% 
+  select(production_companies, total) %>% 
+  arrange(total) %>% 
+  filter(total > 1000) %>% 
+  hchart(type = "column", hcaes(x = "production_companies", y = "total"), colorByPoint = TRUE, name = "Ganancia") %>% 
+  hc_yAxis(title = list(text = "Ganancias")) %>% 
+  hc_xAxis(title = list(text = "Compañia de producción"))
+```
+
+Row
+-----------------------------------------------------------------------
+### Películas por decada 
+
+```{r}
+movie_dataset %>% 
+    na.omit() %>% 
+    mutate(year = year(release_date), decade = year - year%%10, n = n()) %>% 
+    group_by(decade, n) %>% 
+    summarise(n()) %>% 
+    mutate(percentage = round(`n()`/n, 2)) %>% 
+    mutate(label = paste0("Década ",decade)) %>% 
+    hchart("pie", hcaes(x = "label", label= "decade", y = "percentage"), name = "Porcentaje", colorByPoint = TRUE) 
+```
+
+### Top 10 lenguaje
+
+```{r}
+spoken %>% 
+  select(spoken_languages) %>% 
+  mutate(total = n() ) %>% 
+  group_by(spoken_languages) %>% 
+  mutate(n = n()) %>% 
+  ungroup() %>% 
+  mutate(percentage = round(n/total*100,2)) %>% 
+  group_by(spoken_languages) %>% 
+  filter(row_number(spoken_languages) == 1) %>% 
+  arrange(percentage) %>% 
+  na.omit() %>% 
+  tail(10) %>% 
+  hchart("pie", hcaes(x = "spoken_languages", label= "spoken_languages", y = "percentage"), name = "Lenguaje", colorByPoint = TRUE) 
+```
+
+
+R Ladies {data-orientation=rows data-icon="fa-users"}
+=====================================     
+
+Row {.tabset data-width=400}
+-----------------------------------------------------------------------
+
+### R Ladies en el mundo 
+
+```{r}
+url_csv <- 'https://raw.githubusercontent.com/d4tagirl/R-Ladies-growth-maps/master/rladies.csv'
+
+rladies <- read_csv(url(url_csv)) %>% 
+  select(-1) %>% 
+  rename(z = followers, name = location) %>% 
+  mutate(color = colorize(z))
+
+hcmap() %>% 
+  hc_add_series(data = rladies , type = "mapbubble",
+                minSize = 0, maxSize = 30, dataLabels = list(enabled = FALSE),
+                name = "RLadies", tooltip = list(pointFormat  = "{point.name}")) %>% 
+  hc_plotOptions(series = list(showInLegend = FALSE))
+```
+
+
+Row {.tabset data-width=400}
+-----------------------------------------------------------------------
+### Seguidores de menor a mayor por ubicación
+
+```{r}
+rladies %>%  
+  arrange(z) %>% 
+  hchart(type = "column", hcaes(x = "name", y = "z"), colorByPoint = TRUE, name = "Seguidores") %>% 
+  hc_yAxis(title = list(text = "Seguidores")) %>% 
+  hc_xAxis(title = list(text = "Ubicación"))
+```
+
+
