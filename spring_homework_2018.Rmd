@@ -6,7 +6,7 @@ description: |
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
+library(fontawesome)
 # Learn more about creating websites with Radix at:
 # https://rstudio.github.io/radix/website.html
 
@@ -18,13 +18,15 @@ knitr::opts_chunk$set(echo = FALSE)
 <img src="images/images_hw1.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
 El objetivo de la Tarea 1 es introducir el uso de la librería `dplyr` y `magrittr` con su operador %>%, ambos coexisten en el `tidyverse`. La base de datos usada proviene de IMdB.
-
-<button class="button" onclick="myFunction()"> 
-[**Tarea 1**](homework/2018/spring/hw1/hws1.html)
-</button>
+<br>
+</br>
+`r fa("download", fill = "#ee5863")` 
+`r xfun::embed_file("homework/2018/spring/hw1/datasets/datasets.zip", "Data")`
+</br>
+`r fa("desktop", fill = "forestgreen")` 
+[View post](homework/2018/spring/hw1/hws1.html)
 
 </p>
-
 ---
 
 # Tarea 2 `r emo::ji("chart_with_upwards_trend")`
@@ -32,11 +34,13 @@ El objetivo de la Tarea 1 es introducir el uso de la librería `dplyr` y `magrit
 <p>
 <img src="images/images_hw2.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
-El objetivo de la Tarea 2 es relacionar el uso  de R con las finanzas. Utilizando la librería `tidyquant`, calculamos bandas de *bollinger* y *barcharts*. Finalmente se usa la librería `WDI` para descargar datos externos a R como el *World Development Indicator*.   
-
-<button class="button" onclick="myFunction()"> 
-[**Tarea 2**](homework/2018/spring/hw2/hws2.html)
-</button>
+El objetivo de la Tarea 2 es relacionar el uso  de R con las finanzas. Utilizando la librería `tidyquant`, calculamos bandas de *bollinger* y *barcharts*. Finalmente se usa la librería `WDI` para descargar datos externos a R como el *World Development Indicator*. </br>
+</br>
+`r fa("download", fill = "#ee5863")` 
+`r xfun::embed_file("homework/2018/spring/hw1/datasets", "Data")`
+</br>
+`r fa("desktop", fill = "forestgreen")` 
+[View post](homework/2018/spring/hw2/hws2.html)
 
 </p>
 
@@ -48,10 +52,13 @@ El objetivo de la Tarea 2 es relacionar el uso  de R con las finanzas. Utilizand
 <img src="images/images_hw3.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
 Mediante el uso de mapas presentar y visualizar datos mundiales. A nivel nacional se entrega la libertad de seleccionar datos de la regiòn metropolitana y mapear a nivel de comuna (Santiago). Librerìas usadas: `leaflet`, `tmap` y `plotly`, no obstante la pauta esta contruida utilizando `gganimate`.
-
-<button class="button" onclick="myFunction()"> 
-[**Tarea 3**](homework/2018/spring/hw3/hws3.html)
-</button>
+</br>
+</br>
+`r fa("download", fill = "#ee5863")` 
+`r xfun::embed_file("homework/2018/spring/hw3/datasets/datasets.zip", "Data")`
+</br>
+`r fa("desktop", fill = "forestgreen")` 
+[View post](homework/2018/spring/hw3/hws3.html)
 
 </p>
 
@@ -64,10 +71,13 @@ Mediante el uso de mapas presentar y visualizar datos mundiales. A nivel naciona
 margin-left: 40px ; border: solid black 1px; padding: 2px">
 Una imagen vale mas que mil palabras, la frase anterior resume el uso de *Dashboard* usando la librería `flexdashboard`. 
 La base de datos usada proviene de IMdB.
-
-<button class="button" onclick="myFunction()"> 
-[**Tarea 4**](homework/2018/spring/hw4/hws4.html)
-</button>
+</br>
+</br>
+`r fa("download", fill = "#ee5863")` 
+`r xfun::embed_file("homework/2018/spring/hw4/datasets/datasets.zip", "Data")`
+</br>
+`r fa("desktop", fill = "forestgreen")` 
+[View post](homework/2018/spring/hw4/hws4.html)
 
 </p>
 
