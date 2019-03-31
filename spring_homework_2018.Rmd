@@ -21,7 +21,7 @@ El objetivo de la Tarea 1 es introducir el uso de la librería `dplyr` y `magrit
 <br>
 </br>
 `r fa("download", fill = "#ee5863")` 
-`r xfun::embed_file("homework/2018/spring/hw1/datasets/datasets.zip", "Data")`
+[Download data](homework/2018/spring/hw1/datasets/datasets.zip)
 </br>
 `r fa("desktop", fill = "forestgreen")` 
 [View post](homework/2018/spring/hw1/hws1.html)
@@ -37,7 +37,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 El objetivo de la Tarea 2 es relacionar el uso  de R con las finanzas. Utilizando la librería `tidyquant`, calculamos bandas de *bollinger* y *barcharts*. Finalmente se usa la librería `WDI` para descargar datos externos a R como el *World Development Indicator*. </br>
 </br>
 `r fa("download", fill = "#ee5863")` 
-`r xfun::embed_file("homework/2018/spring/hw1/datasets", "Data")`
+[Download data](homework/2018/spring/hw1/datasets)
 </br>
 `r fa("desktop", fill = "forestgreen")` 
 [View post](homework/2018/spring/hw2/hws2.html)
@@ -55,7 +55,7 @@ Mediante el uso de mapas presentar y visualizar datos mundiales. A nivel naciona
 </br>
 </br>
 `r fa("download", fill = "#ee5863")` 
-`r xfun::embed_file("homework/2018/spring/hw3/datasets/datasets.zip", "Data")`
+[Download data](homework/2018/spring/hw3/datasets/datasets.zip)
 </br>
 `r fa("desktop", fill = "forestgreen")` 
 [View post](homework/2018/spring/hw3/hws3.html)
@@ -74,7 +74,7 @@ La base de datos usada proviene de IMdB.
 </br>
 </br>
 `r fa("download", fill = "#ee5863")` 
-`r xfun::embed_file("homework/2018/spring/hw4/datasets/datasets.zip", "Data")`
+[Download data](homework/2018/spring/hw4/datasets/datasets.zip)
 </br>
 `r fa("desktop", fill = "forestgreen")` 
 [View post](homework/2018/spring/hw4/hws4.html)
