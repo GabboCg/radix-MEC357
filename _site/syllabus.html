@@ -526,6 +526,10 @@
   /* Tweak code blocks (note that this CSS is repeated above in an injection
      into the d-code shadow dom) */
   
+  d-code {
+    overflow-x: auto !important;
+  }
+  
   pre.d-code code.d-code {
     padding-left: 10px;
     font-size: 12px;
@@ -556,6 +560,11 @@
   }
   
   @media(min-width: 768px) {
+  
+  d-code {
+    overflow-x: visible !important;
+  }
+  
   pre.d-code code.d-code  {
       padding-left: 18px;
       font-size: 14px;
@@ -1338,8 +1347,7 @@ Tareas
 <div class="nav-dropdown-content">
 <a href="autumn_homework_2018.html">Otoño 2018</a>
 <a href="spring_homework_2018.html">Primavera 2018</a>
-<span class="nav-dropdown-header">Otoño 2019</span>
-<hr/>
+<a href="autumn_homework_2019.html">Otoño 2019</a>
 <span class="nav-dropdown-header">Controles</span>
 <span class="nav-dropdown-header">Examenes</span>
 </div>

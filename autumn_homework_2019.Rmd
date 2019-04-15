@@ -1,0 +1,26 @@
+---
+title: "Tareas Otoño 2019"
+description: |
+ A continuación se encuentran la pauta parcial de las tareas: código `r emo::ji("heavy_plus_sign")` enunciado. El código de la página en Redix como el R Markdown se encuentran en un repositorio en `r emo::ji("heart")` [**Github**](https://github.com/GaboCg) `r emo::ji("heart")`. 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Radix at:
+# https://rstudio.github.io/radix/website.html
+
+```
+
+# Tarea 1 
+
+<p>
+<img src="images/images_hw1_2019_a.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+margin-left: 40px ; border: solid black 1px; padding: 2px">
+
+
+<button class="button" onclick="myFunction()"> 
+[**Tarea 1**](homework/2019/autumn/hw1/hws1.html)
+</button>
+
+</p>

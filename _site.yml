@@ -19,7 +19,7 @@ navbar:
         - text: "Primavera 2018"
           href: spring_homework_2018.html
         - text: "Otoño 2019"
-        - text: "---"
+          href: autumn_homework_2019.html
         - text: "Controles"
         - text: "Examenes"
     - icon: fa-question fa-lg

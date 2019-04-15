@@ -1,0 +1,293 @@
+---
+title: "Pauta Tarea 1"
+author:  <a href="https://gcabrerag.rbind.io/"> <h3> Gabriel Cabrera </h3> </a> \newline Facultad de Economía y Negocios, Universidad de Chile, Chile
+date: "2019-04-15 (updated: `r Sys.Date()`)"
+linkcolor: "red"  
+output: 
+  html_document:
+    highlight: "kate"
+    toc: true
+    css: styles.css
+    code_download: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    code_folding: "show"
+    include:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+---
+
+<center> <b> Instrucciones </b> </center>
+<p>
+
+1.	Esta tarea debe ser entregada en **grupos de 2 o 3 personas**.. 
+2.	Se debe enviar una carpeta comprimida que contenga: un archivo  .Rproj (proyecto en R) y un breve informe en R Markdown con sus resultados, incluyendo tablas, gráficos, etc., según corresponda. El formato del informe puede ser word o pdf..
+3.  El asunto del email con su tarea debe ser “Tarea 1-R 1-Apellido 1-Apellido 2-Apellido 3"
+4.	La fecha de entrega es el Miércoles 10 de Abril del 2019 hasta las 23:59 hrs al correo del curso: [r2019curso@gmail.com](r2019curso@gmail.com). 
+
+---
+
+<div class="quote-container">
+
+> “With great power comes great responsibility.” 
+>
+> <p align="right"> -- *Amazing Fantasy*, Spiderman 1962 </p>
+
+</div>
+
+<br>
+
+# Pregunta 1 {.tabset - .tabset-fade}
+
+En la carpeta **dataset** usted encontrará dos bases de datos:
+**heroes_information.csv** y **super_hero_powers.csv**. Estos datos fueron recolectados en Junio del 2017 desde 
+[superherodb](https://www.superherodb.com/) y no han sido actualizados. 
+La primera base contiene información de las  características físicas de los 
+superheroes/villanos. La segunda almacena información sobre los superpoderes. 
+
+Responda las siguientes preguntas:
+
+<br>
+
+## Pregunta 1.1 {-}
+
+Calcule el porcentaje que representa cada editorial sobre la muestra total y muestre las 10 primeras en un tabla. A continuación realice este mismo análisis, pero restringiéndose sólo a las editoriales *Marvel Comics* y *DC comics*.
+
+```{r, message=FALSE, warning=FALSE}
+# preliminares
+if(!require("pacman")) install.packages("pacman")
+p_load("tidyverse", "janitor", "kableExtra", "knitr")
+
+options(knitr.table.format = 'html')
+```
+
+```{r, message=FALSE, warning=FALSE}
+# cargamos informacion heroes
+heroes_info <- read_csv("dataset/heroes_information.csv") %>% 
+  clean_names() %>% 
+  select(-x1)
+```
+
+```{r, message=FALSE, warning=FALSE}
+# cargamos informacion poderes
+super_hero_power <- read_csv("dataset/super_hero_powers.csv") %>% 
+  clean_names() 
+```
+
+```{r}
+y_publisher_all <- heroes_info %>%
+  mutate(total = nrow(.)) %>% 
+  select(publisher, total) %>% 
+  group_by(publisher) %>% 
+  mutate(total_publ = n()) %>%
+  distinct() %>% 
+  mutate(percentage = (total_publ/total)*100) %>% 
+  arrange(desc(percentage)) %>% 
+  na.omit() %>% 
+  select(publisher, total_publ, percentage)
+```
+
+```{r, echo = FALSE}
+kable(y_publisher_all[1:5,], booktabs = T, digits = 2, align = "lcc",
+  col.names = linebreak(c("Editorial", "Publicaciones", "Porcentaje (%)"), 
+    align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```
+  
+```{r}
+by_publisher <- heroes_info %>% 
+  filter(publisher == "Marvel Comics" | publisher == "DC Comics") %>% 
+  mutate(total = nrow(.)) %>% 
+  select(publisher, total) %>% 
+  group_by(publisher) %>% 
+  mutate(total_publ = n()) %>%
+  distinct() %>% 
+  mutate(percentage = (total_publ/total)*100) %>% 
+  arrange(desc(percentage)) %>% 
+  na.omit() %>% 
+  select(publisher, percentage)
+```
+        
+```{r, echo = FALSE}
+kable(by_publisher, booktabs = T, digits = 2, align = "lcc",
+col.names = linebreak(c("Editorial", "Total"), align = "c")) %>%
+kable_styling(latex_options = c("striped"))
+```        
+
+## Pregunta 1.2 {-}
+
+Construya una tabla que  muestre las cincos primeras razas que más se repiten.  En su análisis no considere aquéllas que no tienen información.
+
+```{r}
+race_type <- heroes_info %>% 
+  group_by(race) %>% 
+  filter(race != "-") %>% 
+  select(race) %>% 
+  mutate(n = n()) %>% 
+  arrange(desc(n)) %>% 
+  distinct()
+```
+
+```{r, echo=FALSE}
+kable(race_type[1:5,], booktabs = T, digits = 2, align = "lcc",
+  col.names = linebreak(c("Raza", "Nº"), align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```        
+    
+## Pregunta 1.3 {-}
+
+Encuentre la cantidad de mujeres y hombre según sus roles (superhéroe o  villano), pero esta vez debe incluir como **otros** aquéllos/as que no tienen ninguna clasificación en la variable *gender*.
+
+```{r, warning=FALSE}
+# good
+gender_type_good <- heroes_info %>% 
+  select(gender, alignment) %>%
+  filter(alignment != "-", alignment == "good") %>% 
+  group_by(gender) %>% 
+  mutate(n = n()) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate_at(vars(gender), funs(replace(., which(.=="-"), "other")))
+```
+
+
+```{r, warning=FALSE}
+# bad
+gender_type_bad <- heroes_info %>% 
+  select(gender, alignment) %>%
+  filter(alignment != "-", alignment == "bad") %>% 
+  group_by(gender) %>% 
+  mutate(n = n()) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate_at(vars(gender), funs(replace(., which(.=="-"), "other")))
+```
+
+```{r, echo=FALSE}
+kable(cbind(gender_type_good %>% select(gender,n),gender_type_bad %>% select(n)), 
+  booktabs = T, digits = 2, align = "lcc",
+  col.names = linebreak(c("Genero", "SuperHeroe", "Villano"), 
+    align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```     
+
+## Pregunta 1.4 {-}
+
+Calcule el índice de masa corporal (IMC^[IMC = peso[kg]/estatura[$m^2$].]) de cada superhéroe y villano. Luego clasifíquelos según el siguiente criterio:
+
+|IMC                    |Clasificación |
+|:---                   |:---          |
+| Inferior a 18.5       | Bajo peso    |
+| Entre 18.5 y 24.9     | Saludable    |
+| Entre 25.0 y 29.9     | Sobrepeso    |
+| Superior o igual a 30 | Obesidad     |
+    
+La variable *Height* esta medida en centímetros (cm) y *Weight* en kilogramos (Kg).
+Además, presente en una tabla a los **primeros dos** personajes de cada clasificación según si es superhéroe o villano. 
+    
+
+```{r}
+# good
+imc_good <- heroes_info %>% 
+  select(name, height, alignment, weight) %>% 
+  filter(alignment != "-", alignment == "good") %>%
+  na.omit() %>% 
+  filter(height > 0, weight > 0) %>% 
+  mutate(imc = weight/((height/100)^2),
+         clasif = if_else(imc < 18.5, "bajo peso",
+                  if_else(imc >= 18.5 & imc < 24.9, "saludable", 
+                  if_else(imc >= 25.0 & imc < 29.9, "sobrepeso", "Obesidad")))
+  ) %>% 
+  group_by(clasif) %>% 
+  arrange(desc(imc)) %>% 
+  filter(row_number(clasif) < 3) 
+```
+
+```{r, echo=FALSE}
+kable(imc_good %>% select(name, imc, clasif), 
+      booktabs = T, digits = 2, align = "lcc",
+      col.names = linebreak(c("Nombre", "IMC Index", "Clasificación"), 
+      align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```            
+      
+```{r}
+# bad
+imc_bad <- heroes_info %>% 
+  select(name, height, alignment, weight) %>% 
+  filter(alignment != "-", alignment == "bad") %>%
+  na.omit() %>% 
+  filter(height > 0, weight > 0) %>% 
+  mutate(imc = weight/((height/100)^2),
+         clasif = if_else(imc < 18.5, "bajo peso",
+                  if_else(imc >= 18.5 & imc < 24.9, "saludable", 
+                  if_else(imc >= 25.0 & imc < 29.9, "sobrepeso", "Obesidad")))
+  ) %>% 
+  group_by(clasif) %>% 
+  arrange(desc(imc)) %>% 
+  filter(row_number(clasif) < 3) 
+```
+          
+```{r, echo=FALSE}
+kable(imc_bad %>% select(name, imc, clasif), 
+      booktabs = T, digits = 2, align = "lcc",
+      col.names = linebreak(c("Nombre", "IMC Index", "Clasificación"), 
+      align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```
+
+## Pregunta 1.5 {-}
+
+Encuentre el superheroe o villano que más poderes posee.
+
+```{r}
+most_power <- super_hero_power %>% 
+  na.omit() %>% 
+  mutate_each(funs(if_else(. == TRUE, 1, 0)), -hero_names) %>%
+  mutate(total = rowSums(.[,2:ncol(.)])) %>% 
+  select(hero_names, total) %>% 
+  arrange(desc(total)) %>% 
+  head(1)    
+```
+    
+```{r, echo=FALSE}
+kable(most_power, 
+      booktabs = T, digits = 2, align = "lc",
+      col.names = linebreak(c("Nombre", "Nº Poderes"), 
+      align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```            
+
+## Pregunta 1.6 {-}
+
+Encuentre los 10 poderes que más se repiten en la muestra.
+
+```{r}
+common_power <- super_hero_power %>% 
+  na.omit() %>% 
+  mutate_each(funs(if_else(. == TRUE, 1, 0)), -hero_names) %>% 
+  select(-hero_names) %>% 
+  colSums(.) %>% 
+  as.data.frame() %>% 
+  rename(total = ".") %>% 
+  mutate(power = row.names(.)) %>% 
+  select(power, total) %>% 
+  arrange(desc(total)) %>% 
+  head(10)
+```
+   
+```{r, echo=FALSE}
+kable(common_power, 
+      booktabs = T, digits = 2, align = "lc",
+      col.names = linebreak(c("Poder", "Nº"), 
+      align = "c")) %>%
+  kable_styling(latex_options = c("striped"))
+```      
