@@ -29,12 +29,12 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 # Tarea 2 
 
 <p>
-<img src="images/images_hw2_2019_a.jpg" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
+<img src="images/images_hw2_2019_a.png" alt="Smiley face" style="float: right; width:320px; height:225px; margin-bottom: 0px 10px;
 margin-left: 40px ; border: solid black 1px; padding: 2px">
 
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 1**](homework/2019/autumn/hw1/hws1.html)
+[**Tarea 1**](homework/2019/autumn/hw2/hws2.html)
 </button>
 
 </p>
