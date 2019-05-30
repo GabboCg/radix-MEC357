@@ -34,7 +34,7 @@ margin-left: 40px ; border: solid black 1px; padding: 2px">
 
 
 <button class="button" onclick="myFunction()"> 
-[**Tarea 1**](homework/2019/autumn/hw2/hws2.html)
+[**Tarea 2**](homework/2019/autumn/hw2/hws2.html)
 </button>
 
 </p>
