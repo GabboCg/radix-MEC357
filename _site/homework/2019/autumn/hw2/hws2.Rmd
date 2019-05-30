@@ -1,0 +1,393 @@
+---
+title: "Pauta Tarea 2"
+author:  <a href="https://gcabrerag.rbind.io/"> <h3> Gabriel Cabrera </h3> </a> \newline Facultad de Economía y Negocios, Universidad de Chile, Chile
+date: "2018-10-15 (updated: `r Sys.Date()`)"
+linkcolor: "red"  
+output: 
+  html_document:
+    highlight: "kate"
+    toc: true
+    css: styles.css
+    code_download: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    number_sections: true
+    code_folding: "show"
+    include:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE)
+```
+
+---
+
+<center> <b> Instrucciones </b> </center>
+<p>
+
+1.	Esta tarea debe ser entregada en **grupos de 2 o 3 personas**. 
+2.	Se debe enviar una carpeta comprimida que contenga: un archivo  .Rproj (proyecto en R) y un breve informe en R Markdown con sus resultados, incluyendo tablas, gráficos, etc., según corresponda. El formato del informe puede ser word o pdf.
+3.  El asunto del email con su tarea debe ser “Tarea 1-R 1-Apellido 1-Apellido 2-Apellido 3"
+4.	La fecha de entrega es el Domingo 5 de Mayo del 2019 hasta las 23:59 hrs al correo del curso: [r2019curso@gmail.com](r2019curso@gmail.com). 
+
+---
+
+<div class="quote-container">
+
+> “The Visual Display of Quantitative Information” 
+>
+> <p align="right"> *Edward R. Tufte*, Above all else show the data </p>
+
+</div>
+
+<br>
+
+# Pregunta 1 {.tabset - .tabset-fade}
+
+El archivo googleplaystore.csv contiene información sobre las aplicaciones existentes en
+Google Play Store. Cargue la base datos utilizando el paquete `readr` y responda las siguientes 
+preguntas.
+
+Table: Diccionario de datos
+
+| N° | Variable       | Clase | Descripción                                                                            |
+|----|----------------|-------|----------------------------------------------------------------------------------------|
+| 1  | App            | chr   | Nombre de la Aplicación                                                                |
+| 2  | Category       | chr   | Categoría a la que pertenece la aplicación                                             |
+| 3  | Rating         | dbl   | Rating asignado por los usuarios                                                       |
+| 4  | Reviews        | int   | Número de reseñas entregado por los usuarios                                           |
+| 5  | Size           | chr   | Tamaño de la aplicación                                                                |
+| 6  | Installs       | chr   | Número de veces en que se instaló/descargó                                             |
+| 7  | Type           | chr   | Pagado o gratis                                                                        |
+| 8  | Price          | chr   | Precio de la aplicación                                                                |
+| 9  | Content Rating | chr   | Grupo etario objetivo: Children / Mature 21+ / Adult                                   |
+| 10 | Genres         | chr   | Una aplicación puede pertenecer a multiples géneros (aparte de su categoría principal) |
+| 11 | Last Updated   | chr   | Última actualización de la aplicación.                                                 |
+| 12 | Current Ver    | chr   | Versión actual de la aplicación disponible en Play Store                               |
+| 13 | Android Ver    | chr   | Versión Android mínimo requerido                                                       |
+
+## Pregunta 1.1 {-}
+
+Use un gráfico de densidad para visualizar el rating. Debe tener en
+consideración la existencia de *missing values* y *NaN*. Comente.
+
+```{r, warning=FALSE, message=FALSE}
+if(!require("pacman")) install.packages("pacman")
+p_load("tidyquant", "janitor")
+```
+
+```{r, message=FALSE, warning=FALSE}
+google_plays_store_tbl <- read_csv("dataset/googleplaystore.csv") %>% 
+  clean_names()
+```
+
+```{r, message=FALSE, warning=FALSE}
+density_plot_tbl <- google_plays_store_tbl %>% 
+  na.omit() %>% 
+  select(rating) %>% 
+  filter(!is.nan(rating)) %>% 
+  ggplot(mapping = aes(x=rating)) + 
+  labs(title = "Densidad de la variable Rating", 
+    subtitle = "Google Play Store", 
+    x = "Rating", 
+    y = "Densidad") + 
+  geom_density(color="darkblue", 
+    fill="lightblue", alpha = 0.75) +
+  theme_tq()
+```
+    
+```{r, echo=FALSE, fig.align="center", fig.width=7, fig.height=5}
+density_plot_tbl
+```
+
+## Pregunta 1.2 {-}
+
+Muestre en un gráfico de barra la cantidad de aplicaciones por categoría. Comente.
+
+```{r}
+app_by_category_tbl <- google_plays_store_tbl %>% 
+  na.omit() %>% 
+  select(category) %>% 
+  group_by(category) %>% 
+  mutate(count=n()) %>% 
+  ungroup() %>% 
+  distinct() %>%
+  ggplot(aes(x=reorder(category, -count), y=count, fill=as_factor(category))) +
+  labs(title = "Cantidad de aplicaciones por categoría",
+    subtitle = "Google Play Store",
+    x = "",
+    y = "") + 
+  geom_bar(stat="identity") +
+  theme_tq() + theme(legend.position = "none",
+                     axis.text.x=element_text(size = 10, angle = 90, 
+                                              vjust = 0, hjust = 1)) 
+```
+    
+```{r, echo=FALSE, fig.align="center", fig.width=7, fig.height=5}
+app_by_category_tbl
+```
+
+## Pregunta 1.3 {-}
+
+Utilizando un boxplot, muestre los cuartiles del rating para cada grupo etario. Comente.
+
+```{r}
+    rating_plot_tbl <- google_plays_store_tbl %>% 
+      na.omit() %>% 
+      select(content_rating, rating) %>% 
+      filter(!is.nan(rating)) %>% 
+      group_by(content_rating) %>% 
+      ggplot(aes(factor(content_rating), rating, fill=as_factor(content_rating))) +
+      geom_boxplot() +
+      labs(title = "Boxplot de la variable rating para cada grupo etario",
+        subtitle = "Google Play Store",
+        x = "",
+        y = "") + 
+      theme_tq() + 
+      theme(legend.position = "none",
+            axis.text.x=element_text(size = 10, angle = 30, 
+                                     vjust = 1, hjust = 1)) 
+```
+
+```{r, echo=FALSE, fig.align="center", fig.width=7, fig.height=5}
+rating_plot_tbl
+```
+
+## Pregunta 1.4 {-}
+
+Use un gráfico de violín que permita la comparación de las distribuciones del
+rating según si es gratis o pagado. Comente.
+
+```{r}
+violin_plot_tbl <- google_plays_store_tbl %>%
+  na.omit() %>%
+  select(type, rating) %>%
+  filter(!is.nan(rating)) %>%
+  group_by(type) %>%
+  ggplot(aes(type, rating, fill=type)) +
+  geom_violin() +
+  labs(title = "Distribuciones del rating",
+       subtitle = "según si es gratis o pagado", 
+       x = "", 
+       y = "", 
+       fill = "") + 
+  theme_tq() + theme(axis.text.x=element_blank())
+```
+
+```{r, echo=FALSE, fig.align="center", fig.width=7, fig.height=5}
+violin_plot_tbl
+```
+
+## Pregunta 1.5 {-}
+
+Calcule el porcentaje de reviews por año^[Una función útil es `str_extract` del paquete **stringr**.]. Presente sus resultados usando un gráfico de torta que considere sólo los años 2017 y 2018. Comente.
+
+```{r}
+pie_plot_tbl <- google_plays_store_tbl %>%
+  na.omit() %>% 
+  select(reviews, last_updated) %>% 
+  mutate(year = str_extract(last_updated, ".\\d{4}"),
+         year = as.numeric(year)) %>% 
+  select(reviews, year) %>% 
+  mutate(total = sum(as.numeric(reviews))) %>% 
+  group_by(year) %>% 
+  mutate(n = sum(as.numeric(reviews)), perc = n/total)  %>% 
+  filter(row_number(year)==1) %>% 
+  select(year, perc) %>% 
+  ungroup() %>% 
+  filter(year >= 2017) %>% 
+  mutate(year = as.character(year)) %>% 
+  ggplot(aes(x = "", y = perc, fill = year)) +
+  geom_bar(stat = "identity", color = "white", width = 1) +
+  coord_polar("y", start = 0) +
+  geom_text(aes(label =  paste0(round(perc*100, 2), "%")), 
+            color = "white", position = position_stack(vjust = 0.5)) +
+  labs(title = "Porcentaje de reviews por año",
+       subtitle = "Años 2017 y 2018",
+       x = NULL, 
+       y = NULL, 
+       fill = NULL) + 
+  theme_tq() +
+  scale_fill_tq() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid  = element_blank())
+```
+    
+```{r, echo=FALSE, fig.align="center", fig.width=5, fig.height=4}
+pie_plot_tbl
+```
+
+# Pregunta 2 {.tabset - .tabset-fade}
+
+## Pregunta 2.1 {-}
+
+Utilizando `tidyquant` descargue los precios diarios para las siguientes empresas 
+tecnológicas: Oracle (ORCL), Nvidia (NVDA), AMD (AMD) y Amazon (AMZN) desde Enero
+del 2000 hasta Diciembre del 2018. 
+
+```{r, message=FALSE}
+library("tidyquant")
+```
+
+```{r}
+symbol <- c("ORCL", "NVDA", "AMD", "AMZN")
+```
+
+```{r}
+stock_daily_tbl <- tq_get(symbol,
+                    from = "2000-01-01",
+                    to = "2019-01-01",
+                    perdiodicity = "daily")
+```
+
+## Pregunta 2.2 {-}
+
+Calcule los retornos mensuales y retornos acumulados mensuales para cada activo, luego grafique. Comente. 
+
+```{r}
+stocks_daily_to_monthly_tbl <- stock_daily_tbl %>% 
+  select(date, symbol, close) %>%
+  group_by(symbol) %>%  
+  tq_transmute(mutate_fun = to.monthly,
+               indexAt = "lastof") %>%
+  mutate(date = as.Date(as.yearmon(date))) %>% 
+  select(date, symbol, close) %>% 
+  spread(symbol, close)
+```
+
+```{r}
+stock_returns_monthly_tbl <- stocks_daily_to_monthly_tbl %>% 
+  gather(symbols, close, -date) %>% 
+  group_by(symbols) %>% 
+  tq_transmute(mutate_fun = periodReturn,
+               period = "monthly",
+               type = "log",
+               col_rename = "returns_monthly"
+              ) %>%
+  slice(-1) %>% 
+  mutate(date = as.Date(as.yearmon(date))) %>% 
+  spread(symbols, returns_monthly)
+```
+
+```{r}
+stock_returns_monthly_tbl  %>%
+  gather(symbol, returns, -date) %>% 
+  ggplot(mapping = aes(x = returns, fill = symbol)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Retornos Activos", 
+       subtitle = "Oracle (ORCL), Nvidia (NVDA), AMD (AMD) y Amazon (AMZN)",
+       x = "Retornos diarios", y = "Densidad") + 
+  theme_tq() +
+  scale_fill_tq() + 
+  facet_wrap(~ symbol, ncol = 2) + 
+  guides(fill=guide_legend(title="Activos:"))
+```
+
+```{r}
+stock_returns_acum_monthly_tbl <- stock_returns_monthly_tbl %>% 
+  gather(symbol, returns, -date) %>% 
+  group_by(symbol) %>% 
+  mutate(returns_acum = cumsum(returns)) %>%
+  select(-returns) %>% 
+  spread(symbol, returns_acum)
+```
+    
+```{r}
+stock_returns_acum_monthly_tbl %>%
+  gather(symbol, returns_acum, -date) %>% 
+  ggplot(mapping = aes(x = date, y = returns_acum, color = symbol)) +
+  geom_line() + 
+  labs(title = "Retornos Acumulado", 
+       subtitle = "Oracle (ORCL), Nvidia (NVDA), AMD (AMD) y Amazon (AMZN)",
+       x = "Periodo", y = "Retorno Acumulado") + 
+  theme_tq() +
+  scale_fill_tq() + 
+  facet_wrap(~ symbol, ncol = 2) + 
+  guides(color = guide_legend(title="Activos:")) + 
+  scale_y_continuous(labels = scales::percent)
+```
+
+## Pregunta 2.3 {-}
+
+Use un Q-Q plot para comparar la distribución de los retornos de cada activo. Comente. 
+
+```{r}
+stock_returns_monthly_tbl %>% 
+  gather(symbol, return, -date) %>% 
+  select(date, symbol, return) %>% 
+  ggplot(mapping = aes(sample = return, color = symbol)) +
+  stat_qq() + 
+  labs(title = "QQ-plot", 
+       subtitle = "Oracle (ORCL), Nvidia (NVDA), AMD (AMD) y Amazon (AMZN)",
+       x = "Theoretical Quantiles", y = "Sample Quantiles", color = "") + 
+  theme_tq() +
+  scale_fill_tq() + 
+  facet_wrap(~ symbol, ncol = 2) 
+```
+
+## Pregunta 2.4 {-}
+
+Realice un análisis técnico mediante el uso de las bandas de Bollinger. Comente.
+
+```{r}
+end <- as_date("2018-12-01")
+```
+
+```{r, message=FALSE, warning=FALSE}
+bbands_function <- function(dat, sym){
+  ggplot(dat, aes(x = date, y = close, open = open,
+                  high = high, low = low, close = close)) +
+    geom_candlestick() +                                   
+    geom_bbands(ma_fun = SMA, sd = 2, n = 20) +             
+    labs(title = glue::glue(sym, " Candlestick Chart"), 
+         subtitle = "BBands con SMA", 
+         y = "Precio de Cierre", x = "Fecha") + 
+    coord_x_date(xlim = c(end - weeks(12), end)) + 
+    scale_y_continuous(expand = expand_scale(mult = c(0, .2))) +
+    theme_tq()
+}
+```
+
+```{r, message=FALSE, warning=FALSE}
+map_stock <- stock_daily_tbl %>% 
+  group_by(symbol) %>%  
+  nest() %>% 
+  mutate(plot = map2(data, symbol, bbands_function))
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
+map_stock$plot
+```
+    
+## Pregunta 2.5 {-}
+
+Investigue respecto a las empresas tecnológicas antes mencionadas^[Le dará contexto respecto a que pesos asignar a su portafolio.], luego construya un portafolio que se vaya rebalanceando mensualemente. Grafique los retornos del portafolio creado.
+
+```{r}
+w <- c(0.25, 0.25, 0.25, 0.25)
+```
+
+```{r}
+portfolio_returns_monthly <- stock_returns_monthly_tbl %>% 
+  gather(asset, returns, -date) %>% 
+  tq_portfolio(assets_col =  asset,
+    returns_col = returns,
+    weights = w,
+    col_rename = "returns",
+    rebalance_on = "months")
+```
+
+```{r}
+portfolio_returns_monthly %>% 
+  mutate(returns = round(returns,4)*100) %>% 
+  ggplot(aes(x=date, y=returns)) + 
+  geom_bar(stat="identity", fill = "orange") + 
+  labs(title = "Retornos Portfolio",
+       subtitle = "Data Viz. usando ggplot2", 
+       x = "Fecha", y = "Retornos (%)") +  
+  theme_tq()
+```
